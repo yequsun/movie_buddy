@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "moviebuddy-20181221184522-authRole",
+            "UnauthRoleArn": "arn:aws:iam::380892166352:role/moviebuddy-20181221184522-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::380892166352:role/moviebuddy-20181221184522-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "moviebuddy-20181221184522-deployment",
+            "UnauthRoleName": "moviebuddy-20181221184522-unauthRole",
+            "StackName": "moviebuddy-20181221184522",
+            "StackId": "arn:aws:cloudformation:us-east-1:380892166352:stack/moviebuddy-20181221184522/7bfc92d0-057a-11e9-8de0-0e1e9f06bbc4"
+        }
+    }
+}

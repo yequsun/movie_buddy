@@ -1,0 +1,5 @@
+{
+    "tableName": "postTable",
+    "partitionKeyName": "pid",
+    "partitionKeyType": "S"
+}

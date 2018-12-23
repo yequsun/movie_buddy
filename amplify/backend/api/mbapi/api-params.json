@@ -1,0 +1,54 @@
+{
+    "paths": [
+        {
+            "name": "/newpost",
+            "lambdaFunction": "postLambda",
+            "privacy": {
+                "private": true,
+                "auth": "rw"
+            }
+        },
+        {
+            "name": "/reply",
+            "lambdaFunction": "replayLambda",
+            "privacy": {
+                "private": true,
+                "auth": "rw"
+            }
+        }
+    ],
+    "resourceName": "mbapi",
+    "apiName": "moviebuddy2e772c7c",
+    "functionArns": [
+        {
+            "lambdaFunction": "postLambda"
+        },
+        {
+            "lambdaFunction": "replayLambda"
+        }
+    ],
+    "privacy": {
+        "auth": 2,
+        "unauth": 0,
+        "authRoleName": "moviebuddy-20181221184522-authRole",
+        "unAuthRoleName": "moviebuddy-20181221184522-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "postLambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "replayLambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

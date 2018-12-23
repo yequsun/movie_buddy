@@ -1,0 +1,332 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Root stack for the Amplify AWS CloudFormation provider",
+	"Parameters": {
+		"DeploymentBucketName": {
+			"Description": "Name of the common deployment bucket provided by the parent stack",
+			"Type": "String",
+			"Default": "DeploymentBucket"
+		},
+		"AuthRoleName": {
+			"Type": "String",
+			"Default": "AuthRoleName"
+		},
+		"UnauthRoleName": {
+			"Type": "String",
+			"Default": "UnauthRoleName"
+		}
+	},
+	"Resources": {
+		"DeploymentBucket": {
+			"Type": "AWS::S3::Bucket",
+			"DeletionPolicy": "Retain",
+			"Properties": {
+				"BucketName": {
+					"Ref": "DeploymentBucketName"
+				}
+			}
+		},
+		"AuthRole": {
+			"Type": "AWS::IAM::Role",
+			"Properties": {
+				"RoleName": {
+					"Ref": "AuthRoleName"
+				},
+				"AssumeRolePolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Sid": "",
+							"Effect": "Allow",
+							"Principal": {
+								"Federated": "cognito-identity.amazonaws.com"
+							},
+							"Action": "sts:AssumeRoleWithWebIdentity",
+							"Condition": {
+								"ForAnyValue:StringLike": {
+									"cognito-identity.amazonaws.com:amr": "authenticated"
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+		"UnauthRole": {
+			"Type": "AWS::IAM::Role",
+			"Properties": {
+				"RoleName": {
+					"Ref": "UnauthRoleName"
+				},
+				"AssumeRolePolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Sid": "",
+							"Effect": "Allow",
+							"Principal": {
+								"Federated": "cognito-identity.amazonaws.com"
+							},
+							"Action": "sts:AssumeRoleWithWebIdentity",
+							"Condition": {
+								"ForAnyValue:StringLike": {
+									"cognito-identity.amazonaws.com:amr": "unauthenticated"
+								}
+							}
+						}
+					]
+				}
+			}
+		},
+		"authcognito688ad36d": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/auth/cognito688ad36d-cloudformation-template.yml",
+				"Parameters": {
+					"identityPoolName": "moviebuddy688ad36d_identitypool_688ad36d",
+					"allowUnauthenticatedIdentities": false,
+					"thirdPartyAuth": false,
+					"lambdaLogPolicy": "cognito688ad36d_lambda_log_policy",
+					"openIdLambdaRoleName": "cognito688ad36d_openid_lambda_role",
+					"openIdRolePolicy": "cognito688ad36d_openid_pass_role_policy",
+					"openIdLambdaIAMPolicy": "cognito688ad36d_openid_lambda_iam_policy",
+					"openIdLogPolicy": "cognito688ad36d_openid_lambda_log_policy",
+					"userPoolName": "moviebuddy688ad36d_userpool_688ad36d",
+					"autoVerifiedAttributes": "email",
+					"mfaConfiguration": "OFF",
+					"mfaTypes": "SMS Text Message",
+					"roleName": "cognito688ad36d_sns-role",
+					"roleExternalId": "cognito688ad36d_role_external_id",
+					"policyName": "cognito688ad36d-sns-policy",
+					"smsAuthenticationMessage": "Your authentication code is {####}",
+					"smsVerificationMessage": "Your verification code is {####}",
+					"emailVerificationSubject": "Your verification code",
+					"emailVerificationMessage": "Your verification code is {####}",
+					"defaultPasswordPolicy": false,
+					"passwordPolicyMinLength": 8,
+					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",
+					"requiredAttributes": "email",
+					"userpoolClientName": "cognito688ad36d_app_client",
+					"userpoolClientGenerateSecret": true,
+					"userpoolClientRefreshTokenValidity": 30,
+					"userpoolClientReadAttributes": "email",
+					"mfaLambdaRole": "cognito688ad36d_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognito688ad36d_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognito688ad36d_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognito688ad36d_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognito688ad36d_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognito688ad36d_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognito688ad36d_userpoolclient_lambda_iam_policy",
+					"userpoolClientSetAttributes": false,
+					"useDefault": "manual",
+					"authSelections": "identityPoolAndUserPool",
+					"resourceName": "cognito688ad36d",
+					"unAuthRoleName": "moviebuddy-20181221184522-unauthRole",
+					"authRoleName": "moviebuddy-20181221184522-authRole",
+					"unAuthRoleArn": "arn:aws:iam::380892166352:role/moviebuddy-20181221184522-unauthRole",
+					"authRoleArn": "arn:aws:iam::380892166352:role/moviebuddy-20181221184522-authRole"
+				}
+			}
+		},
+		"functionmoviebuddye0eed553": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/moviebuddye0eed553-cloudformation-template.json",
+				"Parameters": {}
+			}
+		},
+		"functionpostLambda": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/postLambda-cloudformation-template.json",
+				"Parameters": {
+					"storagepostTableName": {
+						"Fn::GetAtt": [
+							"storagepostTable",
+							"Outputs.Name"
+						]
+					},
+					"storagepostTableArn": {
+						"Fn::GetAtt": [
+							"storagepostTable",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
+		},
+		"functionreplayLambda": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/replayLambda-cloudformation-template.json",
+				"Parameters": {
+					"storagereplyTableName": {
+						"Fn::GetAtt": [
+							"storagereplyTable",
+							"Outputs.Name"
+						]
+					},
+					"storagereplyTableArn": {
+						"Fn::GetAtt": [
+							"storagereplyTable",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
+		},
+		"apiapi2068ffe3": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/api2068ffe3-cloudformation-template.json",
+				"Parameters": {
+					"functionmoviebuddye0eed553Name": {
+						"Fn::GetAtt": [
+							"functionmoviebuddye0eed553",
+							"Outputs.Name"
+						]
+					},
+					"functionmoviebuddye0eed553Arn": {
+						"Fn::GetAtt": [
+							"functionmoviebuddye0eed553",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
+		},
+		"apimbapi": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/mbapi-cloudformation-template.json",
+				"Parameters": {
+					"functionpostLambdaName": {
+						"Fn::GetAtt": [
+							"functionpostLambda",
+							"Outputs.Name"
+						]
+					},
+					"functionpostLambdaArn": {
+						"Fn::GetAtt": [
+							"functionpostLambda",
+							"Outputs.Arn"
+						]
+					},
+					"functionreplayLambdaName": {
+						"Fn::GetAtt": [
+							"functionreplayLambda",
+							"Outputs.Name"
+						]
+					},
+					"functionreplayLambdaArn": {
+						"Fn::GetAtt": [
+							"functionreplayLambda",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
+		},
+		"hostingS3AndCloudFront": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/hosting/template.json",
+				"Parameters": {}
+			}
+		},
+		"storagepostTable": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/storage/postTable-cloudformation-template.json",
+				"Parameters": {
+					"tableName": "postTable",
+					"partitionKeyName": "pid",
+					"partitionKeyType": "S"
+				}
+			}
+		},
+		"storagereplyTable": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/storage/replyTable-cloudformation-template.json",
+				"Parameters": {
+					"tableName": "replyTable",
+					"partitionKeyName": "rid",
+					"partitionKeyType": "S"
+				}
+			}
+		}
+	},
+	"Outputs": {
+		"Region": {
+			"Description": "CloudFormation provider root stack Region",
+			"Value": {
+				"Ref": "AWS::Region"
+			},
+			"Export": {
+				"Name": {
+					"Fn::Sub": "${AWS::StackName}-Region"
+				}
+			}
+		},
+		"StackName": {
+			"Description": "CloudFormation provider root stack ID",
+			"Value": {
+				"Ref": "AWS::StackName"
+			},
+			"Export": {
+				"Name": {
+					"Fn::Sub": "${AWS::StackName}-StackName"
+				}
+			}
+		},
+		"StackId": {
+			"Description": "CloudFormation provider root stack name",
+			"Value": {
+				"Ref": "AWS::StackId"
+			},
+			"Export": {
+				"Name": {
+					"Fn::Sub": "${AWS::StackName}-StackId"
+				}
+			}
+		},
+		"DeploymentBucketName": {
+			"Description": "CloudFormation provider root stack deployment bucket name",
+			"Value": {
+				"Ref": "DeploymentBucketName"
+			},
+			"Export": {
+				"Name": {
+					"Fn::Sub": "${AWS::StackName}-DeploymentBucketName"
+				}
+			}
+		},
+		"AuthRoleArn": {
+			"Value": {
+				"Fn::GetAtt": [
+					"AuthRole",
+					"Arn"
+				]
+			}
+		},
+		"UnauthRoleArn": {
+			"Value": {
+				"Fn::GetAtt": [
+					"UnauthRole",
+					"Arn"
+				]
+			}
+		},
+		"AuthRoleName": {
+			"Value": {
+				"Ref": "AuthRole"
+			}
+		},
+		"UnauthRoleName": {
+			"Value": {
+				"Ref": "UnauthRole"
+			}
+		}
+	}
+}
