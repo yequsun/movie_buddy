@@ -3,7 +3,7 @@
 Movie Buddy is a web app that brings people together to watch movies.
 Going to the movie alone is somehow embarrassing these days. And I created Movie Buddy to solve this problem.
 
-
+[Video Demo](https://www.youtube.com/watch?v=UXNM1gMFwkI&feature=youtu.be)
 
 ## Interactions
 
