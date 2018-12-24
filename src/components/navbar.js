@@ -27,12 +27,21 @@ class Navbar extends Component {
         </Menu.Item>
 
         <Menu.Item
-          as={Link} to='/inbox'
-          name='inbox'
-          active={activeItem === 'inbox'}
+          as={Link} to='/browse'
+          name='browse'
+          active={activeItem === 'browse'}
           onClick={this.handleItemClick}
         >
-          Inbox
+          Browse
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link} to='/messages'
+          name='messages'
+          active={activeItem === 'messages'}
+          onClick={this.handleItemClick}
+        >
+          Messages
         </Menu.Item>
 
         <Menu.Item

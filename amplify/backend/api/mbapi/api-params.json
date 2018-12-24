@@ -15,6 +15,13 @@
                 "private": true,
                 "auth": "rw"
             }
+        },
+        {
+            "name": "/home",
+            "lambdaFunction": "fetchHomeInfoLambda",
+            "privacy": {
+                "open": true
+            }
         }
     ],
     "resourceName": "mbapi",
@@ -25,6 +32,9 @@
         },
         {
             "lambdaFunction": "replayLambda"
+        },
+        {
+            "lambdaFunction": "fetchHomeInfoLambda"
         }
     ],
     "privacy": {
@@ -49,6 +59,15 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "fetchHomeInfoLambda",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
-    ]
+    ],
+    "uuid": "f1e79744"
 }

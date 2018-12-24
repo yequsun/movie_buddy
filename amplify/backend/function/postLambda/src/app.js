@@ -67,6 +67,33 @@ app.get(path, function(req, res) {
      });
   });
 
+  //////////////////////////////////////
+  ///return posts posted by other users
+  app.get('/newpost/o', function(req, res) {
+    var params = {
+      TableName : tableName,
+      KeyConditionExpression: "user <> currentUser",
+      ExpressionAttributeNames:{
+          "user": "user"
+      },
+      ExpressionAttributeValues: {
+          "currentUser": req.body.currentUser
+      }
+  };
+  dynamodb.query(params, function(err, data) {
+    if (err) {
+          res.json({error: 'Could not load items: ' + err.message});
+        }
+    res.json({
+            data: data.Items.map(item => {
+              return item;
+            })
+    });
+      });
+
+
+    });
+
 /********************************
  * HTTP Get method for list objects *
  ********************************/
@@ -158,6 +185,7 @@ app.put(path, function(req, res) {
     TableName: tableName,
     Item: req.body
   }
+  console.log(req.body);
   dynamodb.put(putItemParams, (err, data) => {
     if(err) {
       res.json({error: err, url: req.url, body: req.body});

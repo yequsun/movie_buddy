@@ -1,0 +1,27 @@
+{
+    "paths": [
+        {
+            "name": "/email",
+            "lambdaArn": "arn:aws:lambda:us-east-1:380892166352:function:Boto3SES",
+            "lambdaFunction": "Boto3SES",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "emailAPI",
+    "apiName": "moviebuddy5e7f30fc",
+    "functionArns": [
+        {
+            "lambdaFunction": "Boto3SES",
+            "lambdaArn": "arn:aws:lambda:us-east-1:380892166352:function:Boto3SES"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "moviebuddy-20181221184522-authRole",
+        "unAuthRoleName": "moviebuddy-20181221184522-unauthRole"
+    },
+    "dependsOn": []
+}

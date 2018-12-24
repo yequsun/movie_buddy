@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Form, Card} from 'semantic-ui-react';
-import Amplify, { API } from 'aws-amplify';
-const uuidv1 = require('uuid/v1');
+import ShowtimeCard from '../components/showtimeCard'
 
 class NewPost extends Component{
 
@@ -45,27 +44,6 @@ class NewPost extends Component{
         //var theater = event.target.getAtrribute('theater');
         event.preventDefault();
         //alert(this.state.theater);
-        let apiName = 'mbapi';
-        let path = '/newpost';
-        let newItem = {
-            body: {
-                pid: uuidv1(),
-                user: this.props.username,
-                email: this.props.email,
-                title: this.state.title,
-                theater: this.state.theater,
-                time: this.state.datetime,
-                status: "open"
-            }
-        }
-        console.log(newItem);
-        
-        API.post(apiName, path, newItem).then(response => {
-            console.log(response);
-            alert("Posted!");
-            }).catch(error => {
-                console.log(error.response);
-            });
     }
 
 
@@ -73,7 +51,8 @@ class NewPost extends Component{
         alert('A zip was submitted: ' + this.state.zipcode);
         alert('A date was submitted: ' + this.state.date);
         event.preventDefault();
-        var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + this.state.date + '&zip=' + this.state.zipcode + '&api_key=bdw4fr379pqkxdrbe2dcq6t7';
+        let url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate=' + this.state.date + '&zip=' + this.state.zipcode + '&api_key=vf6pnxs32v5y6ndh7pt6zskz';
+        //let url = 'https://jsonplaceholder.typicode.com/posts';
         console.log(url);
         fetch(url)
         .then(res => res.json())
@@ -81,7 +60,8 @@ class NewPost extends Component{
             (result) => {
             this.setState({
                 submitted:true,
-                moviesOBJs: result.slice(0,5)
+                //moviesOBJs: result.slice(0,5)
+                moviesOBJs:result
             });
             //alert(this.state.moviesOBJs[0].title);
 
@@ -121,58 +101,28 @@ class NewPost extends Component{
         }else{
             return(
                 <div>
-                <ul>
-                    <h3>search result</h3>
-                {this.state.moviesOBJs.map(movie => (
-                    <li key={movie.title}>
-                    <h2>{movie.title}</h2>
-                    <Card.Group>
-                    
-                    
-                        <Card>
-                            <Card.Content>
-                            <h5>{movie.showtimes[0].theatre.name}</h5>
-                            <p>{movie.showtimes[0].dateTime}</p>
-                            <a href={movie.showtimes[0].ticketURI} >ticket</a>
-                            </Card.Content>
-                        </Card>
-                        <Card>
-                            <Card.Content>
-                            <h5>{movie.showtimes[1].theatre.name}</h5>
-                            <p>{movie.showtimes[1].dateTime}</p>
-                            <a href={movie.showtimes[1].ticketURI} >ticket</a>
-                            </Card.Content>
-                        </Card>
-                        <Card>
-                            <Card.Content>
-                            <h5>{movie.showtimes[2].theatre.name}</h5>
-                            <p>{movie.showtimes[2].dateTime}</p>
-                            <a href={movie.showtimes[2].ticketURI} >ticket</a>
-                            </Card.Content>
-                        </Card>
-                    
-                    
-                    </Card.Group>
-                    </li>
-                ))}
-                </ul>
-                <div>
-                <Form onSubmit={this.handlePost}>
-                    <Form.Field>
-                        <label>Movie Title</label>
-                        <input placeholder="Jurrasic Park" value={this.state.movietitle} onChange={this.handleTitleChange}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Theater</label>
-                        <input placeholder="UA Court Street 12 & RPX" value={this.state.theater} onChange={this.handleTheaterChange}/>
-                    </Form.Field>
-                    <Form.Field>
-                        <label>Datetime</label>
-                        <input placeholder="2018-12-22T18:20" value={this.state.datetime} onChange={this.handleDatetimeChange}/>
-                    </Form.Field>
-                    <Button type='submit'>Post</Button>
-                </Form>
-            </div>
+                    <div>
+                        {this.state.moviesOBJs.map(movie => (
+                            <ShowtimeCard title={movie.title} showtimes={movie.showtimes}/>
+                        ))}
+                    </div>
+                    <div>
+                        <Form onSubmit={this.handlePost}>
+                            <Form.Field>
+                                <label>Movie Title</label>
+                                <input placeholder="Jurrasic Park" value={this.state.movietitle} onChange={this.handleTitleChange}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Theater</label>
+                                <input placeholder="UA Court Street 12 & RPX" value={this.state.theater} onChange={this.handleTheaterChange}/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Datetime</label>
+                                <input placeholder="2018-12-22T18:20" value={this.state.datetime} onChange={this.handleDatetimeChange}/>
+                            </Form.Field>
+                            <Button type='submit'>Post</Button>
+                        </Form>
+                    </div>
             </div>
 
             );

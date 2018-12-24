@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/auth/cognito688ad36d-cloudformation-template.yml",
 				"logicalId": "authcognito688ad36d"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:12.994Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.076Z",
 			"output": {
 				"AppClientSecret": "se93k05r327b18q1gh4po7ol7qo2h4j1f8lmab9ia5ultaksgi3",
 				"UserPoolId": "us-east-1_0DP4185ny",
@@ -45,7 +45,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/moviebuddye0eed553-cloudformation-template.json",
 				"logicalId": "functionmoviebuddye0eed553"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:12.999Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.084Z",
 			"output": {
 				"Region": "us-east-1",
 				"Arn": "arn:aws:lambda:us-east-1:380892166352:function:movie_buddy_amplify_lambda1",
@@ -68,19 +68,19 @@
 				}
 			],
 			"lastBuildTimeStamp": "2018-12-22T15:42:09.217Z",
-			"lastPackageTimeStamp": "2018-12-22T17:41:11.216Z",
-			"distZipFilename": "postLambda-1545500469-latest-build.zip",
+			"lastPackageTimeStamp": "2018-12-24T11:50:59.023Z",
+			"distZipFilename": "postLambda-1545652255-latest-build.zip",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/postLambda-cloudformation-template.json",
 				"logicalId": "functionpostLambda"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.046Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.090Z",
 			"output": {
 				"Region": "us-east-1",
 				"Arn": "arn:aws:lambda:us-east-1:380892166352:function:postLambda",
 				"Name": "postLambda"
 			},
-			"lastPushDirHash": "jABJvh54po8AQF7uoL5t6bycBpo="
+			"lastPushDirHash": "i24BTS+QPJHWBh5qgpxWCNOr6U8="
 		},
 		"replayLambda": {
 			"service": "Lambda",
@@ -97,46 +97,42 @@
 				}
 			],
 			"lastBuildTimeStamp": "2018-12-22T15:42:16.666Z",
-			"lastPackageTimeStamp": "2018-12-22T15:42:19.893Z",
-			"distZipFilename": "replayLambda-1545493336-latest-build.zip",
+			"lastPackageTimeStamp": "2018-12-24T14:20:15.802Z",
+			"distZipFilename": "replayLambda-1545661206-latest-build.zip",
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/replayLambda-cloudformation-template.json",
 				"logicalId": "functionreplayLambda"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.012Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.095Z",
 			"output": {
 				"Region": "us-east-1",
 				"Arn": "arn:aws:lambda:us-east-1:380892166352:function:replayLambda",
 				"Name": "replayLambda"
 			},
-			"lastPushDirHash": "8hzWZOUx5rBaJ8c0EABX4YjaV3I="
+			"lastPushDirHash": "fuiPGFVfbfnvyCe0E+W8A0BFZ/c="
+		},
+		"fetchHomeInfoLambda": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [],
+			"lastBuildTimeStamp": "2018-12-24T03:12:43.712Z",
+			"lastPackageTimeStamp": "2018-12-24T05:15:03.340Z",
+			"distZipFilename": "fetchHomeInfoLambda-1545628502-latest-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/fetchHomeInfoLambda-cloudformation-template.json",
+				"logicalId": "functionfetchHomeInfoLambda"
+			},
+			"lastPushTimeStamp": "2018-12-24T15:39:49.102Z",
+			"output": {
+				"Region": "us-east-1",
+				"Arn": "arn:aws:lambda:us-east-1:380892166352:function:fetchHomeInfoLambda",
+				"Name": "fetchHomeInfoLambda"
+			},
+			"lastPushDirHash": "r3+av6ctto5F8Wl6wQUqQZs4R9o="
 		}
 	},
 	"api": {
-		"api2068ffe3": {
-			"service": "API Gateway",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "moviebuddye0eed553",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			],
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/api2068ffe3-cloudformation-template.json",
-				"logicalId": "apiapi2068ffe3"
-			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.018Z",
-			"output": {
-				"ApiName": "api2068ffe3",
-				"RootUrl": "https://q8eylezaed.execute-api.us-east-1.amazonaws.com/Prod"
-			},
-			"lastPushDirHash": "4tdh0QM9FL07htb4343OlVV0d7Y="
-		},
 		"mbapi": {
 			"service": "API Gateway",
 			"providerPlugin": "awscloudformation",
@@ -156,18 +152,41 @@
 						"Name",
 						"Arn"
 					]
+				},
+				{
+					"category": "function",
+					"resourceName": "fetchHomeInfoLambda",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
 				}
 			],
 			"providerMetadata": {
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/mbapi-cloudformation-template.json",
 				"logicalId": "apimbapi"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.023Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.108Z",
 			"output": {
 				"ApiName": "mbapi",
 				"RootUrl": "https://y7owxu0d7h.execute-api.us-east-1.amazonaws.com/Prod"
 			},
-			"lastPushDirHash": "9hUkjS/6PbAWNnrf4vZ9Ik2THl4="
+			"lastPushDirHash": "oBNX3ZpSMzTqE5RptdyLyz5O2z0="
+		},
+		"emailAPI": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/emailAPI-cloudformation-template.json",
+				"logicalId": "apiemailAPI"
+			},
+			"lastPushTimeStamp": "2018-12-24T15:39:49.136Z",
+			"output": {
+				"ApiName": "emailAPI",
+				"RootUrl": "https://1ate5ws8u2.execute-api.us-east-1.amazonaws.com/Prod"
+			},
+			"lastPushDirHash": "iZEnKtPHuA227iznHcuhHbHp50Y="
 		}
 	},
 	"hosting": {
@@ -178,7 +197,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/hosting/template.json",
 				"logicalId": "hostingS3AndCloudFront"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.032Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.119Z",
 			"output": {
 				"S3BucketSecureURL": "https://moviebuddy-20181222002356-hostingbucket.s3.amazonaws.com",
 				"WebsiteURL": "http://moviebuddy-20181222002356-hostingbucket.s3-website-us-east-1.amazonaws.com",
@@ -196,7 +215,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/storage/postTable-cloudformation-template.json",
 				"logicalId": "storagepostTable"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.037Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.124Z",
 			"output": {
 				"PartitionKeyName": "pid",
 				"Region": "us-east-1",
@@ -213,7 +232,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/storage/replyTable-cloudformation-template.json",
 				"logicalId": "storagereplyTable"
 			},
-			"lastPushTimeStamp": "2018-12-22T17:42:13.042Z",
+			"lastPushTimeStamp": "2018-12-24T15:39:49.130Z",
 			"output": {
 				"PartitionKeyName": "rid",
 				"Region": "us-east-1",

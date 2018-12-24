@@ -8,13 +8,13 @@ const awsmobile =  {
     "aws_user_pools_web_client_id": "4q7f95ijcvnh76qrp4m6adn6t9",
     "aws_cloud_logic_custom": [
         {
-            "name": "api2068ffe3",
-            "endpoint": "https://q8eylezaed.execute-api.us-east-1.amazonaws.com/Prod",
+            "name": "mbapi",
+            "endpoint": "https://y7owxu0d7h.execute-api.us-east-1.amazonaws.com/Prod",
             "region": "us-east-1"
         },
         {
-            "name": "mbapi",
-            "endpoint": "https://y7owxu0d7h.execute-api.us-east-1.amazonaws.com/Prod",
+            "name": "emailAPI",
+            "endpoint": "https://1ate5ws8u2.execute-api.us-east-1.amazonaws.com/Prod",
             "region": "us-east-1"
         }
     ],

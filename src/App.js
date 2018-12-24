@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import  'bootstrap/dist/css/bootstrap.min.css'
+
 import Amplify, { API } from 'aws-amplify';
 import aws_exports from './aws-exports';
 import {Header, Icon, Container} from "semantic-ui-react"
@@ -16,8 +18,9 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 //import pages
 import Home from "./pages/home";
 import NewPost from "./pages/newPost";
-import Inbox from "./pages/inbox";
+import Browse from "./pages/browse";
 import Profile from "./pages/profile";
+import Messages from './pages/messages';
 Amplify.configure(aws_exports);
 
 
@@ -29,7 +32,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      username: "initial"
+      username: "initial",
+      email:"",
+      backdrop:""
     }
   }
   
@@ -81,7 +86,8 @@ class App extends Component {
       <Navbar/>
       <Route exact path='/' render={(props) => <Home {...props} username={this.state.username} email={this.state.email}  />}/>
         <Route path="/newpost" render={(props) => <NewPost {...props} username={this.state.username} email={this.state.email}  />}/>
-        <Route path="/inbox" render={(props) => <Inbox {...props} username={this.state.username} email={this.state.email}  />}/>
+        <Route path="/browse" render={(props) => <Browse {...props} username={this.state.username} email={this.state.email}  />}/>
+        <Route path="/messages" render={(props) => <Messages {...props} username={this.state.username} email={this.state.email}  />}/>
         <Route path="/profile" render={(props) => <Profile {...props} username={this.state.username} email={this.state.email}  />}/>
       </Container>
       </Router>

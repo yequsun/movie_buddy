@@ -175,24 +175,11 @@
 				}
 			}
 		},
-		"apiapi2068ffe3": {
+		"functionfetchHomeInfoLambda": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/api2068ffe3-cloudformation-template.json",
-				"Parameters": {
-					"functionmoviebuddye0eed553Name": {
-						"Fn::GetAtt": [
-							"functionmoviebuddye0eed553",
-							"Outputs.Name"
-						]
-					},
-					"functionmoviebuddye0eed553Arn": {
-						"Fn::GetAtt": [
-							"functionmoviebuddye0eed553",
-							"Outputs.Arn"
-						]
-					}
-				}
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/function/fetchHomeInfoLambda-cloudformation-template.json",
+				"Parameters": {}
 			}
 		},
 		"apimbapi": {
@@ -223,8 +210,27 @@
 							"functionreplayLambda",
 							"Outputs.Arn"
 						]
+					},
+					"functionfetchHomeInfoLambdaName": {
+						"Fn::GetAtt": [
+							"functionfetchHomeInfoLambda",
+							"Outputs.Name"
+						]
+					},
+					"functionfetchHomeInfoLambdaArn": {
+						"Fn::GetAtt": [
+							"functionfetchHomeInfoLambda",
+							"Outputs.Arn"
+						]
 					}
 				}
+			}
+		},
+		"apiemailAPI": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/moviebuddy-20181221184522-deployment/amplify-cfn-templates/api/emailAPI-cloudformation-template.json",
+				"Parameters": {}
 			}
 		},
 		"hostingS3AndCloudFront": {

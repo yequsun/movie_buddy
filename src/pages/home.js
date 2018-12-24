@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import {Image} from 'semantic-ui-react';
+import {Image, Divider} from 'semantic-ui-react';
 import {Card} from 'semantic-ui-react';
+import {API} from 'aws-amplify';
+import MovieInfoCard from '../components/movieInfoCard'
+
 const mdb = require('moviedb')('c03761f1d091cd9beaffec31bdc755c0');
 class Home extends Component{
     constructor(props){
@@ -14,68 +17,60 @@ class Home extends Component{
 
 
     componentDidMount(){
-        fetch("http://data.tmsapi.com/v1.1/movies/showings?startDate=2018-12-23&zip=11201&api_key=bdw4fr379pqkxdrbe2dcq6t7")
-        .then(res => res.json())
-        .then(
-            (result) => {
-            this.setState({
-                isLoaded:true,
-                moviesOBJs: result.slice(0,5),
-            });
-            },
-            // Note: it's important to handle errors here
-            // instead of a catch() block so that we don't swallow
-            // exceptions from actual bugs in components.
-            (error) => {
-            this.setState({
-                isLoaded: true,
-                error
-            });
-            }
-        )
+        //////////
+        //////////
+
+
+      let apiName = 'mbapi';
+      let path = '/home/nowPlaying'; 
+      let myInit = {};
+      API.get(apiName, path, myInit).then(response => {
+          console.log(response);
+          // Add your code here
+          this.setState({
+              moviesOBJs : response,
+              isLoaded:true
+          });
+      }).catch(error => {
+          console.log(error.response)
+      });
+
+      path = '/reply/Object/bd588af0-0777-11e9-8e27-0794e58ea3fd';
+
+      API.del(apiName, path).then(response => {
+        console.log(response)
+        }).catch(error => {
+            console.log(error.response)
+        });
+
+
     }
 
 
     render(){
-        const { error, isLoaded, moviesOBJs } = this.state;
-        if (error) {
-          return <div>Error: {error.message}</div>;
-        } else if (!isLoaded) {
-          return <div>Loading...</div>;
-        } else {
-          return (
-            <div>
-            <h3>Latest Release</h3>
-            <Card.Group>
-              {moviesOBJs.map(movie => (
-                <Card key={movie.title}>
-                <Card.Content>
-                  <Card.Header>{movie.title}</Card.Header>
-                  <Card.Description>
-                  {movie.releaseDate}
-                    </Card.Description>
-                    </Card.Content>
-                </Card>
-              ))}
-            </Card.Group>
-            </div>
-          );
-
-          /*
-          return (
-            <ul>
-                <h3>Latest Release</h3>
-              {moviesOBJs.map(movie => (
-                <li key={movie.title}>
-                  {movie.title} {movie.releaseDate}
-                  <Image></Image>
-                </li>
-              ))}
-            </ul>
-          );
-          */
+        if(!this.state.isLoaded){
+            return(
+                <div><h3>Loading...</h3></div>
+            );
+        }else{
+            let backdrop_index = Math.floor(Math.random()*5);
+            let backdrop_url = "https://image.tmdb.org/t/p/w780"+this.state.moviesOBJs[backdrop_index].backdrop;
+            let backdrop_css = {
+                backgroundImage : 'url('+backdrop_url+')'
+            };
+            console.log(backdrop_url);
+            return(
+                <div className='container'>
+                    <h3>Now Playing</h3>
+                    <div className='row'>
+                    {this.state.moviesOBJs.map(movie => (
+                        <MovieInfoCard key = {movie.title} title={movie.title} date={movie.date} poster={movie.poster}/>
+                    ))}
+                    </div>
+                </div>
+            );
         }
-      }
+    }
 }
 
 export default Home;

@@ -5,6 +5,7 @@
   "dependencies": {
     "aws-amplify": "^1.1.17",
     "aws-amplify-react": "^2.2.4",
+    "bootstrap": "^4.2.1",
     "moviedb": "^0.2.10",
     "node-uuid": "^1.4.8",
     "react": "^16.7.0",

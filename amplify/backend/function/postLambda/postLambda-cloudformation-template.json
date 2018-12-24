@@ -27,7 +27,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "moviebuddy-20181221184522-deployment",
-					"S3Key": "amplify-builds/postLambda-1545500469-latest-build.zip"
+					"S3Key": "amplify-builds/postLambda-1545652255-latest-build.zip"
 				}
 			}
 		},
